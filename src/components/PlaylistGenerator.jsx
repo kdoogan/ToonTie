@@ -44,8 +44,8 @@ const PlaylistGenerator = () => {
           return;
         }
 
-        const LASTFM_API_KEY = import.meta.env.VITE_LASTFM_API_KEY;
-        console.log('Using Last.fm API key:', LASTFM_API_KEY ? 'Present' : 'Missing');
+        const lastfm_api = import.meta.env.LASTFM_API_KEY;
+        console.log('Using Last.fm API key:', lastfm_api ? 'Present' : 'Missing');
 
         // Process artists sequentially instead of in parallel to avoid rate limits
         const recommendedTracks = [];
@@ -54,7 +54,7 @@ const PlaylistGenerator = () => {
             console.log(`Processing artist: ${selectedArtist.name}`);
 
             // Get similar artists from Last.fm
-            const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${encodeURIComponent(selectedArtist.name)}&api_key=${LASTFM_API_KEY}&format=json&limit=5`;
+            const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${encodeURIComponent(selectedArtist.name)}&api_key=${lastfm_api}&format=json&limit=5`;
             const lastfmResponse = await fetch(lastfmUrl);
             
             if (!lastfmResponse.ok) {
